@@ -23,6 +23,10 @@ public class Payment {
         paid.publishAfterCommit();
 
 
+    }
+
+    @PostUpdate
+    public void onPostUpdate(){
         Refunded refunded = new Refunded();
         BeanUtils.copyProperties(this, refunded);
         refunded.publishAfterCommit();
