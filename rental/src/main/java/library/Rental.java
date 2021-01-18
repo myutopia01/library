@@ -59,6 +59,26 @@ public class Rental {
 
     }
 
+<<<<<<< HEAD
+=======
+    @PrePersist
+    public void onPrePersist(){
+        Reserved reserved = new Reserved();
+        BeanUtils.copyProperties(this, reserved);
+        reserved.publishAfterCommit();
+
+        //Following code causes dependency to external APIs
+        // it is NOT A GOOD PRACTICE. instead, Event-Policy mapping is recommended.
+
+        library.external.Payment payment = new library.external.Payment();
+        // mappings goes here
+        RentalApplication.applicationContext.getBean(library.external.PaymentService.class)
+            .pay(payment);
+
+
+    }
+
+>>>>>>> 5395d27f09c035496cf7599793358059904198b1
 
     public Long getId() {
         return id;
