@@ -11,7 +11,7 @@ public class Mypage {
         @GeneratedValue(strategy=GenerationType.AUTO)
         private Long id;
         private Long memberId;
-        private Long rentalId;
+        private Long rentalId; // rentalId 또한 고유한 값일 것임
         private String bookStatus;
 
 
