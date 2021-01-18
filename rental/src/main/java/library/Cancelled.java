@@ -1,11 +1,11 @@
+
 package library;
 
 public class Cancelled extends AbstractEvent {
 
     private Long id;
-    private Long memberID;
-    private Long bookID;
-    private String bookStatus;
+    private Long memberId;
+    private Long bookId;
 
     public Long getId() {
         return id;
@@ -15,24 +15,17 @@ public class Cancelled extends AbstractEvent {
         this.id = id;
     }
     public Long getMemberId() {
-        return memberID;
+        return memberId;
     }
 
-    public void setMemberId(Long memberID) {
-        this.memberID = memberID;
+    public void setMemberId(Long memberId) {
+        this.memberId = memberId;
     }
     public Long getBookId() {
-        return bookID;
+        return bookId;
     }
 
-    public void setBookId(Long bookID) {
-        this.bookID = bookID;
-    }
-    public String getBookStatus() {
-        return bookStatus;
-    }
-
-    public void setBookStatus(String bookStatus) {
-        this.bookStatus = bookStatus;
+    public void setBookId(Long bookId) {
+        this.bookId = bookId;
     }
 }

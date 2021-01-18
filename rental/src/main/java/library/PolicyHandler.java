@@ -15,5 +15,12 @@ public class PolicyHandler{
 
     }
 
+    @StreamListener(KafkaProcessor.INPUT)
+    public void wheneverStatusUpdated_(@Payload StatusUpdated statusUpdated){
+
+        if(statusUpdated.isMe()){
+            System.out.println("##### listener  : " + statusUpdated.toJson());
+        }
+    }
 
 }

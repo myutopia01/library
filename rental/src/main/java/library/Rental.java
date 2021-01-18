@@ -8,35 +8,15 @@ import java.util.List;
 @Table(name="Rental_table")
 public class Rental {
 
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
     private Long memberId;
     private Long bookId;
+    private String rentalStatus;
 
     @PostPersist
     public void onPostPersist(){
-        Cancelled cancelled = new Cancelled();
-        BeanUtils.copyProperties(this, cancelled);
-        cancelled.publishAfterCommit();
-
-
-    }
-
-    @PostUpdate
-    public void onPostUpdate(){
-        Rentaled rentaled = new Rentaled();
-        BeanUtils.copyProperties(this, rentaled);
-        rentaled.publishAfterCommit();
-
-
-        Returned returned = new Returned();
-        BeanUtils.copyProperties(this, returned);
-        returned.publishAfterCommit();
-
-
-    }
-
-    @PrePersist
-    public void onPrePersist(){
         Reserved reserved = new Reserved();
         BeanUtils.copyProperties(this, reserved);
         reserved.publishAfterCommit();
@@ -46,8 +26,35 @@ public class Rental {
 
         .external.Payment payment = new .external.Payment();
         // mappings goes here
+
+        // 렌탈ID
+        payment.setRentalId(this.id);
+        // 사용자ID
+        payment.setMemberId(this.memberId);
+        // 책 ID
+        payment.setBookId(this.bookId);
+
         Application.applicationContext.getBean(.external.PaymentService.class)
             .pay(payment);
+
+
+    }
+
+    @PostUpdate
+    public void onPostUpdate(){
+        Cancelled cancelled = new Cancelled();
+        BeanUtils.copyProperties(this, cancelled);
+        cancelled.publishAfterCommit();
+
+
+        Rentaled rentaled = new Rentaled();
+        BeanUtils.copyProperties(this, rentaled);
+        rentaled.publishAfterCommit();
+
+
+        Returned returned = new Returned();
+        BeanUtils.copyProperties(this, returned);
+        returned.publishAfterCommit();
 
 
     }
@@ -73,6 +80,13 @@ public class Rental {
 
     public void setBookId(Long bookId) {
         this.bookId = bookId;
+    }
+    public String getRentalStatus() {
+        return rentalStatus;
+    }
+
+    public void setRentalStatus(String rentalStatus) {
+        this.rentalStatus = rentalStatus;
     }
 
 
