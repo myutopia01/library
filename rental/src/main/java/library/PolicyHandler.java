@@ -20,6 +20,14 @@ public class PolicyHandler{
 
         if(statusUpdated.isMe()){
             System.out.println("##### listener  : " + statusUpdated.toJson());
+            Book book = new Book();
+            book.setId(statusUpdated.getRendtalId());
+            book.setRentalStatus(statusUpdated.getBookStatus());
+
+            bookRepository.save(book);
+
+            System.out.println("##### listener Ship : " + statusUpdated.toJson());
+
         }
     }
 
