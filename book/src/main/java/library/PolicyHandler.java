@@ -30,17 +30,17 @@ public class PolicyHandler{
         }
     }
     @StreamListener(KafkaProcessor.INPUT)
-    public void wheneverCancelled_(@Payload Cancelled cancelled){
+    public void wheneverRefunded_(@Payload Refunded refunded){
 
-        if(cancelled.isMe()){
-            System.out.println("##### listener  : " + cancelled.toJson());
+        if(refunded.isMe()){
+            System.out.println("##### listener  : " + refunded.toJson());
         }
     }
     @StreamListener(KafkaProcessor.INPUT)
-    public void wheneverReserved_(@Payload Reserved reserved){
+    public void wheneverPaid_(@Payload Paid paid){
 
-        if(reserved.isMe()){
-            System.out.println("##### listener  : " + reserved.toJson());
+        if(paid.isMe()){
+            System.out.println("##### listener  : " + paid.toJson());
         }
     }
 

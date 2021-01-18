@@ -5,7 +5,7 @@ public class Reserved extends AbstractEvent {
     private Long id;
     private Long memberID;
     private Long bookID;
-    private String rentalStatus;
+    private String bookStatus;
 
     public Long getId() {
         return id;
@@ -28,11 +28,11 @@ public class Reserved extends AbstractEvent {
     public void setBookId(Long bookID) {
         this.bookID = bookID;
     }
-    public String getRentalStatus() {
-        return rentalStatus;
+    public String getBookStatus() {
+        return bookStatus;
     }
 
-    public void setRentalStatus(String rentalStatus) {
-        this.rentalStatus = rentalStatus;
+    public void setBookStatus(String bookStatus) {
+        this.bookStatus = bookStatus;
     }
 }

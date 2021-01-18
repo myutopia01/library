@@ -11,8 +11,10 @@ public class Payment {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
-    private Long approveNo;
-    private Date approveDate;
+    private Long bookId;
+    private String bookStatus;
+    private Long memberId;
+    private Long rentalId;
 
     @PostPersist
     public void onPostPersist(){
@@ -36,19 +38,33 @@ public class Payment {
     public void setId(Long id) {
         this.id = id;
     }
-    public Long getApproveNo() {
-        return approveNo;
+    public Long getBookId() {
+        return bookId;
     }
 
-    public void setApproveNo(Long approveNo) {
-        this.approveNo = approveNo;
+    public void setBookId(Long bookId) {
+        this.bookId = bookId;
     }
-    public Date getApproveDate() {
-        return approveDate;
+    public String getBookStatus() {
+        return bookStatus;
     }
 
-    public void setApproveDate(Date approveDate) {
-        this.approveDate = approveDate;
+    public void setBookStatus(String bookStatus) {
+        this.bookStatus = bookStatus;
+    }
+    public Long getMemberId() {
+        return memberId;
+    }
+
+    public void setMemberId(Long memberId) {
+        this.memberId = memberId;
+    }
+    public Long getRentalId() {
+        return rentalId;
+    }
+
+    public void setRentalId(Long rentalId) {
+        this.rentalId = rentalId;
     }
 
 

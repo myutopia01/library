@@ -11,7 +11,6 @@ public class Rental {
     private Long id;
     private Long memberId;
     private Long bookId;
-    private String rentalStatus;
 
     @PostPersist
     public void onPostPersist(){
@@ -20,6 +19,24 @@ public class Rental {
         cancelled.publishAfterCommit();
 
 
+    }
+
+    @PostUpdate
+    public void onPostUpdate(){
+        Rentaled rentaled = new Rentaled();
+        BeanUtils.copyProperties(this, rentaled);
+        rentaled.publishAfterCommit();
+
+
+        Returned returned = new Returned();
+        BeanUtils.copyProperties(this, returned);
+        returned.publishAfterCommit();
+
+
+    }
+
+    @PrePersist
+    public void onPrePersist(){
         Reserved reserved = new Reserved();
         BeanUtils.copyProperties(this, reserved);
         reserved.publishAfterCommit();
@@ -31,16 +48,6 @@ public class Rental {
         // mappings goes here
         Application.applicationContext.getBean(.external.PaymentService.class)
             .pay(payment);
-
-
-        Rentaled rentaled = new Rentaled();
-        BeanUtils.copyProperties(this, rentaled);
-        rentaled.publishAfterCommit();
-
-
-        Returned returned = new Returned();
-        BeanUtils.copyProperties(this, returned);
-        returned.publishAfterCommit();
 
 
     }
@@ -66,13 +73,6 @@ public class Rental {
 
     public void setBookId(Long bookId) {
         this.bookId = bookId;
-    }
-    public String getRentalStatus() {
-        return rentalStatus;
-    }
-
-    public void setRentalStatus(String rentalStatus) {
-        this.rentalStatus = rentalStatus;
     }
 
 

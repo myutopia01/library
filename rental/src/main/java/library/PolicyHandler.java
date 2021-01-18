@@ -15,12 +15,5 @@ public class PolicyHandler{
 
     }
 
-    @StreamListener(KafkaProcessor.INPUT)
-    public void wheneverRefunded_(@Payload Refunded refunded){
-
-        if(refunded.isMe()){
-            System.out.println("##### listener  : " + refunded.toJson());
-        }
-    }
 
 }

@@ -7,6 +7,11 @@ import java.util.List;
 
 public interface MypageRepository extends CrudRepository<Mypage, Long> {
 
-    List<> findByRentalStatus(String rentalStatus);
+    List<> findByMemberId(Long memberId);
+    List<> findByRentalId(Long rentalId);
+    List<> findByMemberId(Long memberId);
+    List<> findByRentalId(Long rentalId);
+    List<> findByMemberId(Long memberId);
+    List<> findByRentalId(Long rentalId);
 
 }

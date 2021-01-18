@@ -24,7 +24,7 @@ public class MypageViewHandler {
                 // view 객체 생성
                   = new ();
                 // view 객체에 이벤트의 Value 를 set 함
-                .setId(.getId());
+                .setMemberId(.getMemberId());
                 // view 레파지 토리에 save
                 Repository.save();
             }
@@ -39,9 +39,14 @@ public class MypageViewHandler {
         try {
             if (rentaled.isMe()) {
                 // view 객체 조회
-                Optional<> Optional = Repository.findById(.getId());
-                if( Optional.isPresent()) {
-                      = Optional.get();
+                List<> List = Repository.findByMemberId(.getMemberId());
+                for(  : List){
+                    // view 객체에 이벤트의 eventDirectValue 를 set 함
+                    // view 레파지 토리에 save
+                    Repository.save();
+                }
+                List<> List = Repository.findByRentalId(.getId());
+                for(  : List){
                     // view 객체에 이벤트의 eventDirectValue 를 set 함
                     // view 레파지 토리에 save
                     Repository.save();
@@ -56,7 +61,13 @@ public class MypageViewHandler {
         try {
             if (cancelled.isMe()) {
                 // view 객체 조회
-                List<> List = Repository.findByRentalStatus(.getRentalStatus());
+                List<> List = Repository.findByMemberId(.getMemberId());
+                for(  : List){
+                    // view 객체에 이벤트의 eventDirectValue 를 set 함
+                    // view 레파지 토리에 save
+                    Repository.save();
+                }
+                List<> List = Repository.findByRentalId(.getId());
                 for(  : List){
                     // view 객체에 이벤트의 eventDirectValue 를 set 함
                     // view 레파지 토리에 save
@@ -72,9 +83,14 @@ public class MypageViewHandler {
         try {
             if (returned.isMe()) {
                 // view 객체 조회
-                Optional<> Optional = Repository.findById(.getId());
-                if( Optional.isPresent()) {
-                      = Optional.get();
+                List<> List = Repository.findByMemberId(.getMemberId());
+                for(  : List){
+                    // view 객체에 이벤트의 eventDirectValue 를 set 함
+                    // view 레파지 토리에 save
+                    Repository.save();
+                }
+                List<> List = Repository.findByRentalId(.getId());
+                for(  : List){
                     // view 객체에 이벤트의 eventDirectValue 를 set 함
                     // view 레파지 토리에 save
                     Repository.save();
