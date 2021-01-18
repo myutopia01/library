@@ -15,6 +15,8 @@ public class Rental {
     private Long bookId;
     private String rentalStatus;
 
+
+    // 김성민 postpersist가 아니라 prepersist가 되어야 할 것 같음
     @PostPersist
     public void onPostPersist(){
         Reserved reserved = new Reserved();
@@ -24,7 +26,7 @@ public class Rental {
         //Following code causes dependency to external APIs
         // it is NOT A GOOD PRACTICE. instead, Event-Policy mapping is recommended.
 
-        .external.Payment payment = new .external.Payment();
+        library.external.Payment payment = new library.external.Payment();
         // mappings goes here
 
         // 렌탈ID
@@ -34,7 +36,7 @@ public class Rental {
         // 책 ID
         payment.setBookId(this.bookId);
 
-        Application.applicationContext.getBean(.external.PaymentService.class)
+        RentalApplication.applicationContext.getBean(library.external.PaymentService.class)
             .pay(payment);
 
 
@@ -42,20 +44,22 @@ public class Rental {
 
     @PostUpdate
     public void onPostUpdate(){
-        Cancelled cancelled = new Cancelled();
-        BeanUtils.copyProperties(this, cancelled);
-        cancelled.publishAfterCommit();
 
-
-        Rentaled rentaled = new Rentaled();
-        BeanUtils.copyProperties(this, rentaled);
-        rentaled.publishAfterCommit();
-
-
-        Returned returned = new Returned();
-        BeanUtils.copyProperties(this, returned);
-        returned.publishAfterCommit();
-
+        if (this.rentalStatus.equals("Cancelled") ) {
+            Cancelled cancelled = new Cancelled();
+            BeanUtils.copyProperties(this, cancelled);
+            cancelled.publishAfterCommit();
+        }
+        else if (this.rentalStatus.equals("Rentaled") ) {
+            Rentaled rentaled = new Rentaled();
+            BeanUtils.copyProperties(this, rentaled);
+            rentaled.publishAfterCommit();
+        }
+        else if (this.rentalStatus.equals("Returned") ) {
+            Returned returned = new Returned();
+            BeanUtils.copyProperties(this, returned);
+            returned.publishAfterCommit();
+        }
 
     }
 
