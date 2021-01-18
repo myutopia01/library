@@ -22,81 +22,89 @@ public class MypageViewHandler {
         try {
             if (reserved.isMe()) {
                 // view 객체 생성
-                  = new ();
+                Mypage mypage  = new Mypage();
                 // view 객체에 이벤트의 Value 를 set 함
-                .setMemberId(.getMemberId());
+                mypage.setMemberId(reserved.getMemberId());
+                mypage.setRentalId(reserved.getId());
+                mypage.setBookStatus(reserved.getBookStatus());
                 // view 레파지 토리에 save
-                Repository.save();
+                mypageRepository.save(mypage);
+
+// Mypage Create 되었단 메시지 출력..
+System.out.println("##### listener Create : " + reserved.toJson());
             }
-        }catch (Exception e){
+        } catch (Exception e){
             e.printStackTrace();
         }
     }
-
 
     @StreamListener(KafkaProcessor.INPUT)
     public void whenRentaled_then_UPDATE_1(@Payload Rentaled rentaled) {
         try {
             if (rentaled.isMe()) {
                 // view 객체 조회
-                List<> List = Repository.findByMemberId(.getMemberId());
-                for(  : List){
+                List<Mypage> mypageList = mypageRepository.findByRentalId(rentaled.getId());
+                for(Mypage mypage : mypageList){
                     // view 객체에 이벤트의 eventDirectValue 를 set 함
+                    mypage.setBookStatus(rentaled.getBookStatus());
+                    mypage.setRentalId(rentaled.getId());
+                    //mypage.setMemberId(rentaled.getMemberId());
+
                     // view 레파지 토리에 save
-                    Repository.save();
-                }
-                List<> List = Repository.findByRentalId(.getId());
-                for(  : List){
-                    // view 객체에 이벤트의 eventDirectValue 를 set 함
-                    // view 레파지 토리에 save
-                    Repository.save();
+                    mypageRepository.save(mypage);
+
+// Mypage Update 되었단 메시지 출력..
+System.out.println("##### listener UpdateStatus rentaled : " + rentaled.toJson());
                 }
             }
-        }catch (Exception e){
+        } catch (Exception e){
             e.printStackTrace();
         }
     }
+
     @StreamListener(KafkaProcessor.INPUT)
     public void whenCancelled_then_UPDATE_2(@Payload Cancelled cancelled) {
         try {
             if (cancelled.isMe()) {
                 // view 객체 조회
-                List<> List = Repository.findByMemberId(.getMemberId());
-                for(  : List){
+                List<Mypage> mypageList = mypageRepository.findByRentalId(cancelled.getId());
+                for(Mypage mypage : mypageList){
                     // view 객체에 이벤트의 eventDirectValue 를 set 함
+                    mypage.setBookStatus(cancelled.getBookStatus());
+                    mypage.setRentalId(cancelled.getId());
+                    //mypage.setMemberId(cancelled.getMemberId()); // rentalId가 키값일 것임
+
                     // view 레파지 토리에 save
-                    Repository.save();
-                }
-                List<> List = Repository.findByRentalId(.getId());
-                for(  : List){
-                    // view 객체에 이벤트의 eventDirectValue 를 set 함
-                    // view 레파지 토리에 save
-                    Repository.save();
+                    mypageRepository.save(mypage);
+// Mypage Update 되었단 메시지 출력..
+System.out.println("##### listener UpdateStatus cancelled : " + cancelled.toJson());
                 }
             }
-        }catch (Exception e){
+        } catch (Exception e){
             e.printStackTrace();
         }
     }
+
     @StreamListener(KafkaProcessor.INPUT)
     public void whenReturned_then_UPDATE_3(@Payload Returned returned) {
         try {
             if (returned.isMe()) {
                 // view 객체 조회
-                List<> List = Repository.findByMemberId(.getMemberId());
-                for(  : List){
+                List<Mypage> mypageList = mypageRepository.findByRentalId(returned.getId());
+                for(Mypage mypage : mypageList){
                     // view 객체에 이벤트의 eventDirectValue 를 set 함
+                    mypage.setBookStatus(returned.getBookStatus());
+                    mypage.setRentalId(returned.getId());
+                    //mypage.setMemberId(returned.getMemberId());
+
                     // view 레파지 토리에 save
-                    Repository.save();
-                }
-                List<> List = Repository.findByRentalId(.getId());
-                for(  : List){
-                    // view 객체에 이벤트의 eventDirectValue 를 set 함
-                    // view 레파지 토리에 save
-                    Repository.save();
+                    mypageRepository.save(mypage);
+
+// Mypage Update 되었단 메시지 출력..
+System.out.println("##### listener UpdateStatus returned : " + returned.toJson());
                 }
             }
-        }catch (Exception e){
+        } catch (Exception e){
             e.printStackTrace();
         }
     }
