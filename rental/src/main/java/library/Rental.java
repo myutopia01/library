@@ -44,9 +44,9 @@ public class Rental {
         //Following code causes dependency to external APIs
         // it is NOT A GOOD PRACTICE. instead, Event-Policy mapping is recommended.
 
-        .external.Payment payment = new .external.Payment();
+        library.external.Payment payment = new library.external.Payment();
         // mappings goes here
-        Application.applicationContext.getBean(.external.PaymentService.class)
+        RentalApplication.applicationContext.getBean(library.external.PaymentService.class)
             .pay(payment);
 
 
