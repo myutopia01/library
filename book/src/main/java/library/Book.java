@@ -11,17 +11,13 @@ public class Book {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
-    private String bookName;
+    private Long bookId;
     private String bookStatus;
     private Long memberId;
+    private Long rendtalId;
 
     @PostPersist
     public void onPostPersist(){
-        Registered registered = new Registered();
-        BeanUtils.copyProperties(this, registered);
-        registered.publishAfterCommit();
-
-
         StatusUpdated statusUpdated = new StatusUpdated();
         BeanUtils.copyProperties(this, statusUpdated);
         statusUpdated.publishAfterCommit();
@@ -37,12 +33,12 @@ public class Book {
     public void setId(Long id) {
         this.id = id;
     }
-    public String getBookName() {
-        return bookName;
+    public Long getBookId() {
+        return bookId;
     }
 
-    public void setBookName(String bookName) {
-        this.bookName = bookName;
+    public void setBookId(Long bookId) {
+        this.bookId = bookId;
     }
     public String getBookStatus() {
         return bookStatus;
@@ -57,6 +53,13 @@ public class Book {
 
     public void setMemberId(Long memberId) {
         this.memberId = memberId;
+    }
+    public Long getRendtalId() {
+        return rendtalId;
+    }
+
+    public void setRendtalId(Long rendtalId) {
+        this.rendtalId = rendtalId;
     }
 
 

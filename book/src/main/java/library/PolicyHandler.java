@@ -23,13 +23,6 @@ public class PolicyHandler{
         }
     }
     @StreamListener(KafkaProcessor.INPUT)
-    public void wheneverReturned_(@Payload Returned returned){
-
-        if(returned.isMe()){
-            System.out.println("##### listener  : " + returned.toJson());
-        }
-    }
-    @StreamListener(KafkaProcessor.INPUT)
     public void wheneverRefunded_(@Payload Refunded refunded){
 
         if(refunded.isMe()){
@@ -41,6 +34,13 @@ public class PolicyHandler{
 
         if(paid.isMe()){
             System.out.println("##### listener  : " + paid.toJson());
+        }
+    }
+    @StreamListener(KafkaProcessor.INPUT)
+    public void wheneverReturned_(@Payload Returned returned){
+
+        if(returned.isMe()){
+            System.out.println("##### listener  : " + returned.toJson());
         }
     }
 

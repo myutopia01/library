@@ -14,39 +14,12 @@ public class PolicyHandler{
     public void onStringEventListener(@Payload String eventString){
 
     }
-    @Autowired
-    PaymentRepository paymentRepository;
-    @StreamListener(KafkaProcessor.INPUT)
-    public void wheneverPaid_(@Payload Paid paid){
-
-        if(paid.isMe()){
-            //추가
-            Payment payment = new Payment();
-            payment.setId(paid.getId());
-            payment.setBookId(paid.getBookId());
-            payment.setBookStatus(paid.getBookStatus());
-            //payment.setMemberId();
-            //payment.setRentalId();
-            paymentRepository.save(payment);
-            // 결제 성공 로그
-            System.out.println("##### paid success : " + paid.toJson());
-        }
-    }
 
     @StreamListener(KafkaProcessor.INPUT)
     public void wheneverCancelled_(@Payload Cancelled cancelled){
 
         if(cancelled.isMe()){
-            //추가
-            Payment payment = new Payment();
-            payment.setId(cancelled.getId());
-            payment.setBookId(cancelled.getBookId());
-            payment.setBookStatus(cancelled.getBookStatus());
-            //payment.setMemberId();
-            //payment.setRentalId();
-            paymentRepository.save(payment);
-            // 취소 성공 로그
-            System.out.println("##### cancelled success  : " + cancelled.toJson());
+            System.out.println("##### listener  : " + cancelled.toJson());
         }
     }
 
