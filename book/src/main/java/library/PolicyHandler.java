@@ -64,7 +64,7 @@ public class PolicyHandler{
             // 대여
             System.out.println("##### listener  : " + rentaled.toJson());
 
-            Optional<Book> bookOptional = bookRepository.findById(rentaled.getId());
+            Optional<Book> bookOptional = bookRepository.findById(rentaled.getBookId());
             Book book = bookOptional.get();
 
             book.setId(rentaled.getBookId());
@@ -83,7 +83,7 @@ public class PolicyHandler{
         if(returned.isMe()){
             System.out.println("##### listener  : " + returned.toJson());
             // 반납
-            Optional<Book> bookOptional = bookRepository.findById(returned.getId());
+            Optional<Book> bookOptional = bookRepository.findById(returned.getBookId());
             Book book = bookOptional.get();
 
             book.setId(returned.getBookId());
