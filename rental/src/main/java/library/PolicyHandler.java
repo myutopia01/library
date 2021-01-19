@@ -21,7 +21,7 @@ public class PolicyHandler{
     RentalRepository rentalRepository;
 
     @StreamListener(KafkaProcessor.INPUT)
-    public void wheneverStatusUpdated_StatusUpdate(@Payload StatusUpdated statusUpdated){
+    public void wheneverStatusUpdated_(@Payload StatusUpdated statusUpdated){
 
         if(statusUpdated.isMe()){
             System.out.println("##### listener  : " + statusUpdated.toJson());
