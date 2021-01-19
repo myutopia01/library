@@ -16,7 +16,8 @@ public class Book {
     private Long memberId;
     private Long rendtalId;
 
-    @PostPersist
+    //@PostPersist
+    @PostUpdate
     public void onPostPersist(){
         StatusUpdated statusUpdated = new StatusUpdated();
         BeanUtils.copyProperties(this, statusUpdated);
