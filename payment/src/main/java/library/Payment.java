@@ -17,6 +17,7 @@ public class Payment {
 
     @PostPersist
     public void onPostPersist(){
+        System.out.println("##### 페이의 경우  : ");
         Paid paid = new Paid();
         BeanUtils.copyProperties(this, paid);
         paid.publishAfterCommit();
@@ -41,6 +42,15 @@ public class Payment {
 
 
     }
+
+    @PostUpdate
+    public void onPostUpdate() {
+        System.out.println("##### 취소의 경우  : ");
+        Refunded refunded = new Refunded();
+        BeanUtils.copyProperties(this, refunded);
+        refunded.publishAfterCommit();
+    }
+
 
 
     public Long getId() {

@@ -16,20 +16,6 @@ public class PolicyHandler{
     }
     @Autowired
     PaymentRepository paymentRepository;
-    @StreamListener(KafkaProcessor.INPUT)
-    public void wheneverPaid_(@Payload Paid paid){
-
-        if(paid.isMe()){
-            //추가
-            Payment payment = new Payment();
-            payment.setId(paid.getId());
-            payment.setBookId(paid.getBookId());
-            payment.setRentalId(paid.getRentalId());
-            paymentRepository.save(payment);
-            // 결제 성공 로그
-            System.out.println("##### paid success : " + paid.toJson());
-        }
-    }
 
     @StreamListener(KafkaProcessor.INPUT)
     public void wheneverCancelled_(@Payload Cancelled cancelled){
