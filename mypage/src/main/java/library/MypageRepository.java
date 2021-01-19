@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface MypageRepository extends CrudRepository<Mypage, Long> {
 
-    List<Mypage> findByRentalId(Long rentalId);
+    // 회원ID(memberId), 도서ID(bookId)로 Mypage 조회
+    List<Mypage> findByMemberIdAndBookId(Long memberId, Long bookId);
 
 }
