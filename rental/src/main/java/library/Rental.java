@@ -32,7 +32,7 @@ public class Rental {
         payment.setReqState("reserve");
 
         RentalApplication.applicationContext.getBean(library.external.PaymentService.class)
-            .payship(payment);
+            .pay(payment);
     }
 
     @PostUpdate
