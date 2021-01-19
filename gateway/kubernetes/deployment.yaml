@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
         - name: gateway
-          image: gcr.io/library/gateway
+          image:  skcc01.azurecr.io/gateway:latest
           ports:
             - containerPort: 8080
