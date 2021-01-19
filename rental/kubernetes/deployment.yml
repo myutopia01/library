@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: rental
-          image: username/rental:latest
+          image: skcc01.azurecr.io/rental:latest
           ports:
             - containerPort: 8080
           readinessProbe:
