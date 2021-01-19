@@ -13,6 +13,7 @@ public class Payment {
     private Long id;
     private Long rentalId;
     private Long bookId;
+    private Long memberId;
 
     @PostPersist
     public void onPostPersist(){
@@ -49,6 +50,13 @@ public class Payment {
 
     public void setBookId(Long bookId) {
         this.bookId = bookId;
+    }
+    public Long getMemberId() {
+        return memberId;
+    }
+
+    public void setMemberId(Long memberId) {
+        this.memberId = memberId;
     }
 
 
