@@ -15,4 +15,5 @@ public interface PaymentService {
     @RequestMapping(method= RequestMethod.POST, path="/payments")
     public void pay(@RequestBody Payment payment);
 
+
 }
