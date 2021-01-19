@@ -19,7 +19,12 @@ spec:
           image: skcc01.azurecr.io/book:latest
           ports:
             - containerPort: 8080
-#          readinessProbe:
+          resources:
+            limits:
+              cpu: 500m
+            requests:
+              cpu: 200m
+#           readinessProbe:
 #            httpGet:
 #              path: '/actuator/health'
 #              port: 8080
@@ -27,11 +32,11 @@ spec:
 #            timeoutSeconds: 2
 #            periodSeconds: 5
 #            failureThreshold: 10
-          livenessProbe:
-            httpGet:
-              path: '/actuator/health'
-              port: 8080
-            initialDelaySeconds: 120
-            timeoutSeconds: 2
-            periodSeconds: 5
-            failureThreshold: 5
+#          livenessProbe:
+#            httpGet:
+#              path: '/actuator/health'
+#              port: 8080
+#            initialDelaySeconds: 120
+#            timeoutSeconds: 2
+#            periodSeconds: 5
+#            failureThreshold: 5
