@@ -16,6 +16,8 @@ public class PolicyHandler{
     }
     @Autowired
     PaymentRepository paymentRepository;
+    
+    /*
     @StreamListener(KafkaProcessor.INPUT)
     public void wheneverPaid_(@Payload Paid paid){
 
@@ -31,6 +33,7 @@ public class PolicyHandler{
             System.out.println("##### paid success : " + paid.toJson());
         }
     }
+    */
 
     @StreamListener(KafkaProcessor.INPUT)
     public void wheneverCancelled_(@Payload Cancelled cancelled){
