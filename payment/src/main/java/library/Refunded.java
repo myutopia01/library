@@ -4,9 +4,9 @@ package library;
 public class Refunded extends AbstractEvent {
 
     private Long id;
-    private Long rentalId;
     private Long bookId;
     private Long memberId;
+    private String reqState;
 
     public Long getId() {
         return id;
@@ -14,13 +14,6 @@ public class Refunded extends AbstractEvent {
 
     public void setId(Long id) {
         this.id = id;
-    }
-    public Long getRentalId() {
-        return rentalId;
-    }
-
-    public void setRentalId(Long rentalId) {
-        this.rentalId = rentalId;
     }
     public Long getBookId() {
         return bookId;
@@ -35,5 +28,12 @@ public class Refunded extends AbstractEvent {
 
     public void setMemberId(Long memberId) {
         this.memberId = memberId;
+    }
+    public String getReqState() {
+        return reqState;
+    }
+
+    public void setReqState(String reqState) {
+        this.reqState = reqState;
     }
 }

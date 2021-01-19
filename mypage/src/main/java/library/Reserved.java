@@ -3,9 +3,9 @@ package library;
 public class Reserved extends AbstractEvent {
 
     private Long id;
-    private Long memberID;
-    private Long bookID;
-    private String bookStatus;
+    private Long memberId;
+    private Long bookId;
+    private String reqState;
 
     public Long getId() {
         return id;
@@ -15,24 +15,24 @@ public class Reserved extends AbstractEvent {
         this.id = id;
     }
     public Long getMemberId() {
-        return memberID;
+        return memberId;
     }
 
-    public void setMemberId(Long memberID) {
-        this.memberID = memberID;
+    public void setMemberId(Long memberId) {
+        this.memberId = memberId;
     }
     public Long getBookId() {
-        return bookID;
+        return bookId;
     }
 
-    public void setBookId(Long bookID) {
-        this.bookID = bookID;
+    public void setBookId(Long bookId) {
+        this.bookId = bookId;
     }
-    public String getBookStatus() {
-        return bookStatus;
+    public String getReqState() {
+        return reqState;
     }
 
-    public void setBookStatus(String bookStatus) {
-        this.bookStatus = bookStatus;
+    public void setReqState(String reqState) {
+        this.reqState = reqState;
     }
 }

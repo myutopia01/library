@@ -5,6 +5,7 @@ public class Reserved extends AbstractEvent {
     private Long id;
     private Long memberId;
     private Long bookId;
+    private String reqState;
 
     public Long getId() {
         return id;
@@ -26,5 +27,12 @@ public class Reserved extends AbstractEvent {
 
     public void setBookId(Long bookId) {
         this.bookId = bookId;
+    }
+    public String getReqState() {
+        return reqState;
+    }
+
+    public void setReqState(String reqState) {
+        this.reqState = reqState;
     }
 }

@@ -8,12 +8,15 @@ import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class PolicyHandler{
     @StreamListener(KafkaProcessor.INPUT)
     public void onStringEventListener(@Payload String eventString){
 
     }
+
     @Autowired
     PaymentRepository paymentRepository;
 
@@ -21,15 +24,19 @@ public class PolicyHandler{
     public void wheneverCancelled_(@Payload Cancelled cancelled){
 
         if(cancelled.isMe()){
-            //추가
-            Payment payment = new Payment();
+            System.out.println("##### listener  : " + cancelled.toJson());
+
+            Optional<Payment> paymentOptional = paymentRepository.findById(cancelled.getId());
+            Payment payment = paymentOptional.get();
+
             payment.setId(cancelled.getId());
+            payment.setMemberId(cancelled.getMemberId());
             payment.setBookId(cancelled.getBookId());
-            payment.setRentalId(cancelled.getBookId());
+            payment.setReqState(cancelled.getReqState());
+
             paymentRepository.save(payment);
-            // 취소 성공 로그
-            System.out.println("##### cancelled success  : " + cancelled.toJson());
+
+            System.out.println("##### listener Ship : " + cancelled.toJson());
         }
     }
-
 }

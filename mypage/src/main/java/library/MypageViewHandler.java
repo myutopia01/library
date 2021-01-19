@@ -21,41 +21,47 @@ public class MypageViewHandler {
     public void whenReserved_then_CREATE_1 (@Payload Reserved reserved) {
         try {
             if (reserved.isMe()) {
+                System.out.println("##### listener in : " + reserved.toJson());
                 // view 객체 생성
                 Mypage mypage = new Mypage();
                 // view 객체에 이벤트의 Value 를 set 함
+                mypage.setId(reserved.getId());
                 mypage.setMemberId(reserved.getMemberId());
                 mypage.setBookId(reserved.getBookId());
+                mypage.setBookStatus("reserved");
                 // view 레파지토리 save
                 mypageRepository.save(mypage);
-// Mypage Create 되었단 메시지 출력.. 삭제해도됨.
-                System.out.println("##### listener Create : " + reserved.toJson());
+                // Mypage Create 되었단 메시지 출력.. 삭제해도됨.
+                System.out.println("##### listener out : " + reserved.toJson());
             }
         }catch (Exception e){
             e.printStackTrace();
         }
     }
-
 
     @StreamListener(KafkaProcessor.INPUT)
     public void whenStatusUpdated_then_UPDATE_1(@Payload StatusUpdated statusUpdated) {
         try {
+            System.out.println("########## listener: " + statusUpdated.toJson());
             if (statusUpdated.isMe()) {
                 // view 객체 조회
-                List<Mypage> mypageList = mypageRepository.findByMemberIdAndBookId(statusUpdated.getMemberId(), statusUpdated.getId());
-                for(Mypage mypage  : mypageList){
+                System.out.println("############ listener in : " + statusUpdated.toJson());
+                Optional<Mypage> mypageOptional = mypageRepository.findById(statusUpdated.getRendtalId());
+                Mypage mypage = mypageOptional.get();
+
+                //for(Mypage mypage  : mypageList){
                     // view 객체에 이벤트의 eventDirectValue 를 set 함
-                    mypage.setBookStatus(statusUpdated.getBookStatus());
+                mypage.setBookStatus(statusUpdated.getBookStatus());
                     // view 레파지 토리에 save
                     mypageRepository.save(mypage);
-                }
+                //}
 
-// Mypage Update 되었단 메시지 출력.. 삭제해도됨.
+                // Mypage Update 되었단 메시지 출력.. 삭제해도됨.
                 System.out.println("##### listener Update : " + statusUpdated.toJson());
             }
+
         }catch (Exception e){
             e.printStackTrace();
         }
     }
-
 }

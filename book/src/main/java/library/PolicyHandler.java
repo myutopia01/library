@@ -8,68 +8,91 @@ import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class PolicyHandler{
-    // kjh
-    @Autowired BookRepository bookRepository;
+    @StreamListener(KafkaProcessor.INPUT)
+    public void onStringEventListener(@Payload String eventString){
+
+    }
+    @Autowired
+    BookRepository bookRepository;
+
+    @StreamListener(KafkaProcessor.INPUT)
+    public void wheneverPaid_(@Payload Paid paid){
+        // 결제완료(예약)
+
+        if(paid.isMe()){
+            System.out.println("##### listener  : " + paid.toJson());
+
+            Book book = new Book();
+
+            book.setId(paid.getBookId());
+            book.setMemberId(paid.getMemberId());
+            book.setRendtalId(paid.getId());
+            book.setBookStatus("reserved");
+
+            bookRepository.save(book);
+        }
+    }
 
 
+    @StreamListener(KafkaProcessor.INPUT)
+    public void wheneverRefunded_(@Payload Refunded refunded){
+        // 예약취소
+        if(refunded.isMe()){
+            System.out.println("##### listener  : " + refunded.toJson());
+
+            Optional<Book> bookOptional = bookRepository.findById(refunded.getId());
+            Book book = bookOptional.get();
+
+            book.setId(refunded.getBookId());
+            book.setMemberId(refunded.getMemberId());
+            book.setRendtalId(refunded.getId());
+
+            book.setBookStatus("refunded");
+
+            bookRepository.save(book);
+        }
+    }
 
     @StreamListener(KafkaProcessor.INPUT)
     public void wheneverRentaled_(@Payload Rentaled rentaled){
 
-        if(rentaled.isMe() && rentaled.getBookId()!=null){
+        if(rentaled.isMe()){
+            // 대여
             System.out.println("##### listener  : " + rentaled.toJson());
-            // Correlation id 는 'bookID' 임
-            bookRepository.findById(Long.valueOf(rentaled.getBookId())).ifPresent((book)->{
-                book.setBookStatus(rentaled.getRentalStatus());
-                book.setMemberId(rentaled.getMemberId());
-                //rental ID는 일단 bookID로 ...
-                book.setRendtalId(rentaled.getBookId());
-                bookRepository.save(book);
-            });
 
+            Optional<Book> bookOptional = bookRepository.findById(rentaled.getId());
+            Book book = bookOptional.get();
+
+            book.setId(rentaled.getBookId());
+            book.setMemberId(rentaled.getMemberId());
+            book.setRendtalId(rentaled.getId());
+
+            book.setBookStatus("rentaled");
+
+            bookRepository.save(book);
         }
     }
-    @StreamListener(KafkaProcessor.INPUT)
-    public void wheneverRefunded_(@Payload Refunded refunded){
 
-        if(refunded.isMe()  && refunded.getBookId()!=null ){
-            System.out.println("##### listener  : " + refunded.toJson());
-            bookRepository.findById(Long.valueOf(refunded.getBookId())).ifPresent((book)->{
-                book.setBookStatus("refunded");
-                book.setMemberId(null);
-                book.setRendtalId(null);
-                bookRepository.save(book);
-            });
-        }
-    }
-    @StreamListener(KafkaProcessor.INPUT)
-    public void wheneverPaid_(@Payload Paid paid){
-
-        if(paid.isMe() && paid.getBookId()!=null){
-            System.out.println("##### listener  : " + paid.toJson());
-            bookRepository.findById(Long.valueOf(paid.getBookId())).ifPresent((book)->{
-                book.setBookStatus("paid");
-//                book.setMemberId(null);
-//                book.setRendtalId(null);
-                bookRepository.save(book);
-            });
-
-
-        }
-    }
     @StreamListener(KafkaProcessor.INPUT)
     public void wheneverReturned_(@Payload Returned returned){
 
-        if(returned.isMe() && returned.getBookId()!=null){
+        if(returned.isMe()){
             System.out.println("##### listener  : " + returned.toJson());
-            bookRepository.findById(Long.valueOf(returned.getBookId())).ifPresent((book)->{
-                book.setBookStatus("returned");
-                book.setMemberId(null);
-                book.setRendtalId(null);
-                bookRepository.save(book);
-            });
+            // 반납
+            Optional<Book> bookOptional = bookRepository.findById(returned.getId());
+            Book book = bookOptional.get();
+
+            book.setId(returned.getBookId());
+            book.setMemberId(returned.getMemberId());
+            book.setRendtalId(returned.getId());
+
+            book.setBookStatus("returned");
+
+            bookRepository.save(book);
         }
     }
 

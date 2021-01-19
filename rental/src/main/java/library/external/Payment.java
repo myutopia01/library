@@ -3,21 +3,15 @@ package library.external;
 public class Payment {
 
     private Long id;
-    private Long rentalId;
     private Long bookId;
     private Long memberId;
+    private String reqState;
 
     public Long getId() {
         return id;
     }
     public void setId(Long id) {
         this.id = id;
-    }
-    public Long getRentalId() {
-        return rentalId;
-    }
-    public void setRentalId(Long rentalId) {
-        this.rentalId = rentalId;
     }
     public Long getBookId() {
         return bookId;
@@ -30,6 +24,12 @@ public class Payment {
     }
     public void setMemberId(Long memberId) {
         this.memberId = memberId;
+    }
+    public String getReqState() {
+        return reqState;
+    }
+    public void setReqState(String reqState) {
+        this.reqState = reqState;
     }
 
 }

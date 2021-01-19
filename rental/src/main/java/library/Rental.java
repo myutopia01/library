@@ -10,57 +10,49 @@ public class Rental {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    private Long id;
-    private Long memberId;
-    private Long bookId;
-    private String rentalStatus;
+    private Long id;         //예약번호
+    private Long memberId;  // 사용자번호
+    private Long bookId;    // 책번호
+    private String reqState;//요청: "reserve", "cancel", "rental", "return"
 
-
-    // 김성민 postpersist가 아니라 prepersist가 되어야 할 것 같음
     @PostPersist
     public void onPostPersist(){
         Reserved reserved = new Reserved();
         BeanUtils.copyProperties(this, reserved);
         reserved.publishAfterCommit();
 
+
         //Following code causes dependency to external APIs
         // it is NOT A GOOD PRACTICE. instead, Event-Policy mapping is recommended.
-
         library.external.Payment payment = new library.external.Payment();
         // mappings goes here
-
-        // 렌탈ID
-        payment.setRentalId(this.id);
-        // 사용자ID
+        payment.setId(this.id);
         payment.setMemberId(this.memberId);
-        // 책 ID
         payment.setBookId(this.bookId);
+        payment.setReqState("reserve");
 
         RentalApplication.applicationContext.getBean(library.external.PaymentService.class)
-            .pay(payment);
-
-
+            .payship(payment);
     }
 
     @PostUpdate
     public void onPostUpdate(){
-
-        if (this.rentalStatus.equals("Cancelled") ) {
+        if (this.reqState.equals("cancel") ) {
             Cancelled cancelled = new Cancelled();
             BeanUtils.copyProperties(this, cancelled);
             cancelled.publishAfterCommit();
-        }
-        else if (this.rentalStatus.equals("Rentaled") ) {
+            System.out.println("cancelled" + cancelled.toJson());
+        }  else if (this.reqState.equals("rental") ) {
             Rentaled rentaled = new Rentaled();
             BeanUtils.copyProperties(this, rentaled);
             rentaled.publishAfterCommit();
-        }
-        else if (this.rentalStatus.equals("Returned") ) {
+            System.out.println("rentaled" + rentaled.toJson());
+        }  else if (this.reqState.equals("return") ) {
             Returned returned = new Returned();
             BeanUtils.copyProperties(this, returned);
             returned.publishAfterCommit();
+            System.out.println("returned" + returned.toJson());
         }
-
     }
 
     public Long getId() {
@@ -84,15 +76,12 @@ public class Rental {
     public void setBookId(Long bookId) {
         this.bookId = bookId;
     }
-    public String getRentalStatus() {
-        return rentalStatus;
+    public String getReqState() {
+        return reqState;
     }
 
-    public void setRentalStatus(String rentalStatus) {
-        this.rentalStatus = rentalStatus;
+    public void setReqState(String reqState) {
+        this.reqState = reqState;
     }
-
-
-
 
 }

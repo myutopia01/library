@@ -14,7 +14,6 @@ import java.util.Optional;
 public class PolicyHandler{
     @StreamListener(KafkaProcessor.INPUT)
     public void onStringEventListener(@Payload String eventString){
-
     }
 
     @Autowired
@@ -26,22 +25,13 @@ public class PolicyHandler{
         if(statusUpdated.isMe()){
             System.out.println("##### listener  : " + statusUpdated.toJson());
 
-            /*
-            Book book = new Book();
-            book.setId(statusUpdated.getRendtalId());
-            book.setRentalStatus(statusUpdated.getBookStatus());
-
-            bookRepository.save(book);
-            */
-
             Optional<Rental> rentalOptional = rentalRepository.findById(statusUpdated.getRendtalId());
             Rental rental = rentalOptional.get();
-            rental.setRentalStatus(statusUpdated.getBookStatus());
+            rental.setReqState(statusUpdated.getBookStatus());
 
             rentalRepository.save(rental);
 
             System.out.println("##### listener Ship : " + statusUpdated.toJson());
-
         }
     }
 

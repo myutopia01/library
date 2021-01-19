@@ -6,7 +6,7 @@ public class Rentaled extends AbstractEvent {
     private Long id;
     private Long memberId;
     private Long bookId;
-    private String rentalStatus;
+    private String reqState;
 
     public Long getId() {
         return id;
@@ -29,11 +29,11 @@ public class Rentaled extends AbstractEvent {
     public void setBookId(Long bookId) {
         this.bookId = bookId;
     }
-    public String getRentalStatus() {
-        return rentalStatus;
+    public String getReqState() {
+        return reqState;
     }
 
-    public void setRentalStatus(String rentalStatus) {
-        this.rentalStatus = rentalStatus;
+    public void setReqState(String reqState) {
+        this.reqState = reqState;
     }
 }
