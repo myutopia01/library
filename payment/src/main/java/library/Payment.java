@@ -22,16 +22,22 @@ public class Payment {
         paid.publishAfterCommit();
 
 
+        // 분기 처리 필요 일단 막아두겠습니다.
+        /*
         Refunded refunded = new Refunded();
         BeanUtils.copyProperties(this, refunded);
         refunded.publishAfterCommit();
+        */
+
 
         //부하테스트 시간끌기
+        /*
         try {
             Thread.currentThread().sleep((long) (400 + Math.random() * 220));
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        */
 
 
     }
