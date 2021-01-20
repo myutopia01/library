@@ -365,9 +365,10 @@ hystrix:
 ```
 $ siege -c100 -t60S -v --content-type "application/json" 'http://rental:8080/rentals POST {"memberId":1, "bookId":1}'
 
+```
     ![image](https://user-images.githubusercontent.com/53402465/105115586-6d837900-5b0c-11eb-81be-448a9d34edea.jpg)
     ![image](https://user-images.githubusercontent.com/53402465/105115589-6f4d3c80-5b0c-11eb-9819-36eab2df1a12.jpg)
-```
+
 - 운영시스템은 죽지 않고 지속적으로 CB 에 의하여 적절히 회로가 열림과 닫힘이 벌어지면서 자원을 보호하고 있음을 보여줌. 
 - 약 97%정도 정상적으로 처리되었음.
 
@@ -388,14 +389,13 @@ siege -c100 -t120S -r10 --content-type "application/json" 'http://localhost:8081
 kubectl get deploy pay -w
 ```
 - 어느정도 시간이 흐른 후 스케일 아웃이 벌어지는 것을 확인할 수 있다:
-```
+
     ![image](https://user-images.githubusercontent.com/53402465/105116790-c3f1b700-5b0e-11eb-8a8e-80016c453ebd.PNG)
-:
-```
+
 - siege 의 로그를 보아도 전체적인 성공률이 높아진 것을 확인 할 수 있다. 
-```
+
     ![image](https://user-images.githubusercontent.com/53402465/105116542-50e84080-5b0e-11eb-8da0-33f742007e41.jpg)
-```
+
 
 
 ## 무정지 재배포
