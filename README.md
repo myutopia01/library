@@ -143,11 +143,14 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 public interface BookRepository extends PagingAndSortingRepository<Book, Long>{
 }
 ```
+
 - 적용 후 REST API 의 테스트 시나리오
-```
+
 1. SAGA
 2. CQRS
 3. Correlation
+
+```
 # 사용자가 도서를 예약한다
 http POST http://20.194.7.119:8080/rentals memberId=1 bookId=1
 ```
@@ -293,7 +296,7 @@ public interface PaymentService {
 ```
 - 동기식 호출에서는 호출 시간에 따른 타임 커플링이 발생하며, 결제 시스템이 장애가 나면 주문도 못받는다는 것을 확인:
 
-```
+
 # 결제 (payment) 서비스를 잠시 내려놓음
 
 #주문처리
