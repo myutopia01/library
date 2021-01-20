@@ -333,6 +333,14 @@ http localhost:8080/rentals     # 모든 주문의 상태가 "reserved"으로 �
 각 구현체들은 각자의 source repository 에 구성되었고, 사용한 CI/CD 플랫폼은 Azure를 사용하였으며, pipeline build script 는 각 프로젝트 폴더 이하에 cloudbuild.yml 에 포함되었다.
 
 
+6. Deploy / Pipeline
+
+![azure_gateway_deployment](https://user-images.githubusercontent.com/75237785/105120584-d6232380-5b15-11eb-8422-bb9bfc0cb273.jpg)
+
+![externalip gateway connect](https://user-images.githubusercontent.com/75237785/105121326-41212a00-5b17-11eb-840f-d3c3bc369163.jpg)
+
+
+
 ## 동기식 호출 / 서킷 브레이킹 / 장애격리
 
 7. Circuit Breaker
