@@ -197,6 +197,13 @@ http GET http://20.194.7.119:8080/books
 ![image](https://user-images.githubusercontent.com/53402465/105122170-1041f480-5b19-11eb-9496-20c40fcfeffb.png)
 
 ```
+#마이페이지 확인
+http GET http://20.194.7.119:8080/mypages/1
+```
+
+![image](https://user-images.githubusercontent.com/75401893/105123042-b4786b00-5b1a-11eb-9f8c-0b0b20a7e8d9.png)
+
+```
 
 # 사용자 도서 예약
 http POST http://20.194.7.119:8080/rentals memberId=1 bookId=1 
@@ -233,9 +240,13 @@ http GET http://20.194.7.119:8080/books
 ![image](https://user-images.githubusercontent.com/53402465/105122635-edfca680-5b19-11eb-81c2-5a3b8876ede8.png)
 
 ```
-# mypage 서비스의 예약/대여 상태 조회
+#마이페이지 확인
+http GET http://20.194.7.119:8080/mypages/2
 ```
 
+![image](https://user-images.githubusercontent.com/75401893/105123049-b8a48880-5b1a-11eb-833e-a44ac80e983a.png)
+
+```
 
 
 4. Request / Response
