@@ -146,7 +146,9 @@ public interface BookRepository extends PagingAndSortingRepository<Book, Long>{
 ```
 - 적용 후 REST API 의 테스트 시나리오
 ```
-
+1. SAGA
+2. CQRS
+3. Correlation
 # 사용자 도서 예약
 http POST http://localhost:8081/rentals memberId=1 bookId=1
 # 사용자 예약 후 결제확인
@@ -180,7 +182,7 @@ http GET  http://localhost:8083/mypages
 ```
 
 
-
+4. Request / Response
 ## 동기식 호출 과 Fallback 처리
 
 분석단계에서의 조건 중 하나로 대여(rental)->결제(payment) 간의 호출은 동기식 일관성을 유지하는 트랜잭션으로 처리하기로 하였다. 호출 프로토콜은 이미 앞서 Rest Repository 에 의해 노출되어있는 REST 서비스를 FeignClient 를 이용하여 호출하도록 한다. 
@@ -325,6 +327,8 @@ http localhost:8080/rentals     # 모든 주문의 상태가 "reserved"으로 �
 
 ## 동기식 호출 / 서킷 브레이킹 / 장애격리
 
+7. Circuit Breaker
+
 * 서킷 브레이킹 프레임워크의 선택: Spring FeignClient + Hystrix 옵션을 사용하여 구현함
 
 시나리오는 대여(rental)-->결제(payment) 연결을 RESTful Request/Response 로 연동하여 구현이 되어있고, 결제 요청이 과도할 경우 CB 를 통하여 장애격리.
@@ -372,6 +376,7 @@ $ siege -c100 -t60S -v --content-type "application/json" 'http://rental:8080/ren
 - 운영시스템은 죽지 않고 지속적으로 CB 에 의하여 적절히 회로가 열림과 닫힘이 벌어지면서 자원을 보호하고 있음을 보여줌. 
 - 약 97%정도 정상적으로 처리되었음.
 
+8. Autoscale (HPA)
 ### 오토스케일 아웃
 앞서 CB 는 시스템을 안정되게 운영할 수 있게 해줬지만 사용자의 요청을 100% 받아들여주지 못했기 때문에 이에 대한 보완책으로 자동화된 확장 기능을 적용하고자 한다. 
 
@@ -397,7 +402,7 @@ kubectl get deploy pay -w
     ![image](https://user-images.githubusercontent.com/53402465/105116542-50e84080-5b0e-11eb-8da0-33f742007e41.jpg)
 
 
-
+9. Zero-downtime deploy (readiness probe)
 ## 무정지 재배포
 
 * 먼저 무정지 재배포가 100% 되는 것인지 확인하기 위해서 Autoscaler 이나 CB 설정을 제거함
