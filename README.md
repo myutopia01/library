@@ -305,8 +305,11 @@ public class PolicyHandler{
 http http://localhost:8081/rentals memberId=1 bookId=1  #Success  
 
 #주문상태 확인
+
 ```
-- ![image](https://user-images.githubusercontent.com/53402465/105119392-96f3d300-5b13-11eb-99b0-f9a79bdde8b7.PNG)
+:
+    ![image](https://user-images.githubusercontent.com/53402465/105119392-96f3d300-5b13-11eb-99b0-f9a79bdde8b7.PNG)
+
 ``` 
 
 #상점 서비스 기동
@@ -316,7 +319,8 @@ mvn spring-boot:run
 #주문상태 확인
 http localhost:8080/rentals     # 모든 주문의 상태가 "reserved"으로 확인
 ```
-- ![image](https://user-images.githubusercontent.com/53402465/105119394-978c6980-5b13-11eb-8159-65886bee3a81.PNG)
+:
+    ![image](https://user-images.githubusercontent.com/53402465/105119394-978c6980-5b13-11eb-8159-65886bee3a81.PNG)
 
 
 # 운영
@@ -373,6 +377,7 @@ $ siege -c100 -t60S -v --content-type "application/json" 'http://rental:8080/ren
 ```
 : 
     ![image](https://user-images.githubusercontent.com/53402465/105115586-6d837900-5b0c-11eb-81be-448a9d34edea.jpg)
+:    
     ![image](https://user-images.githubusercontent.com/53402465/105115589-6f4d3c80-5b0c-11eb-9819-36eab2df1a12.jpg)
 
 - 운영시스템은 죽지 않고 지속적으로 CB 에 의하여 적절히 회로가 열림과 닫힘이 벌어지면서 자원을 보호하고 있음을 보여줌. 
@@ -417,14 +422,18 @@ kubectl set image ...
 ```
 
 - readiness 설정
+
     ![image](https://user-images.githubusercontent.com/53402465/105119450-b25ede00-5b13-11eb-947b-a2d6da8de334.jpg)
+
 - seige 의 화면으로 넘어가서 Availability 가 100% 미만으로 떨어졌는지 확인
+
     ![image](https://user-images.githubusercontent.com/53402465/105119446-b1c64780-5b13-11eb-9af5-c28364c8870c.jpg)
 
 배포기간중 Availability 가 평소 100%에서 97% 대로 떨어지는 것을 확인. 
 원인은 쿠버네티스가 성급하게 새로 올려진 서비스를 READY 상태로 인식하여 서비스 유입을 진행한 것이기 때문. 이를 막기위해 Readiness Probe 를 설정함:
 
 - readiness 설정 수정
+
     ![image](https://user-images.githubusercontent.com/53402465/105119444-b12db100-5b13-11eb-9143-04f44194eb64.jpg)
 
 ```
@@ -432,5 +441,7 @@ kubectl apply -f kubernetes/deployment.yaml
 ```
 
 - 동일한 시나리오로 재배포 한 후 Availability 확인:
+
     ![image](https://user-images.githubusercontent.com/53402465/105119438-af63ed80-5b13-11eb-981e-bb5b1c754cea.jpg)
+
 배포기간 동안 Availability 가 변화없기 때문에 무정지 재배포가 성공한 것으로 확인됨.
