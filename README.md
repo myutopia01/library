@@ -249,16 +249,6 @@ http GET http://20.194.7.119:8080/mypages/2
 ![image](https://user-images.githubusercontent.com/75401893/105123049-b8a48880-5b1a-11eb-833e-a44ac80e983a.png)
 
 
-
-```
-# 책 예약 후 Rental 상태 변경 내역 확인
-http POST http://20.194.7.119/rentals memberId=1 bookId=1
-http GET http://20.194.7.119:8080/rentals/3
-```
-
-![corelation](https://user-images.githubusercontent.com/75237785/105124589-c60f4200-5b1d-11eb-970d-034386a6ac2d.jpg)
-
-
 4. Request / Response
 
 ```
