@@ -372,6 +372,8 @@ public class PolicyHandler{
 #주문처리
 http http://localhost:8081/rentals memberId=1 bookId=1  #Success  
 
+
+```
 #주문상태 확인
 
 ```
