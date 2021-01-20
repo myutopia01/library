@@ -204,7 +204,6 @@ http GET http://20.194.7.119:8080/mypages/1
 ![image](https://user-images.githubusercontent.com/75401893/105123042-b4786b00-5b1a-11eb-9f8c-0b0b20a7e8d9.png)
 
 ```
-
 # 사용자 도서 예약
 http POST http://20.194.7.119:8080/rentals memberId=1 bookId=1 
 ```
@@ -247,7 +246,6 @@ http GET http://20.194.7.119:8080/mypages/2
 ![image](https://user-images.githubusercontent.com/75401893/105123049-b8a48880-5b1a-11eb-833e-a44ac80e983a.png)
 
 ```
-
 
 4. Request / Response
 ## 동기식 호출 과 Fallback 처리
