@@ -14,8 +14,7 @@
      - [동기식 호출 / 서킷 브레이킹 / 장애격리](#동기식-호출-서킷-브레이킹-장애격리)
      - [오토스케일 아웃](#오토스케일-아웃)
      - [무정지 재배포](#무정지-재배포)
-   - [신규 개발 조직의 추가](#신규-개발-조직의-추가)
- 
+    
 # 서비스 시나리오
  
  기능적 요구사항
@@ -297,16 +296,18 @@ public class PolicyHandler{
 
 ```
 
+
 도서관리 시스템은 대여/결제와 완전히 분리되어있으며, 이벤트 수신에 따라 처리되기 때문에, 도서관리시스템이 유지보수로 인해 잠시 내려간 상태라도 주문을 받는데 문제가 없다:
 ```
 # 도서관리 서비스 (book) 를 잠시 내려놓음
 
 #주문처리
 http http://localhost:8081/rentals memberId=1 bookId=1  #Success  
-http http://localhost:8081/rentals memberId=2 bookId=2  #Success
 
 #주문상태 확인
-http localhost:8080/rentals     # 상태 안바뀜 "reserve" 확인 
+```
+- ![image](https://user-images.githubusercontent.com/53402465/104991785-e6c69180-5a62-11eb-9478-19b0582d4201.PNG)
+``` 
 
 #상점 서비스 기동
 cd book
@@ -315,6 +316,7 @@ mvn spring-boot:run
 #주문상태 확인
 http localhost:8080/rentals     # 모든 주문의 상태가 "reserved"으로 확인
 ```
+- ![image](https://user-images.githubusercontent.com/53402465/105119394-978c6980-5b13-11eb-8159-65886bee3a81.PNG)
 
 
 # 운영
@@ -408,58 +410,27 @@ kubectl get deploy pay -w
 * 먼저 무정지 재배포가 100% 되는 것인지 확인하기 위해서 Autoscaler 이나 CB 설정을 제거함
 
 - seige 로 배포작업 직전에 워크로드를 모니터링 함.
-```
-siege -c100 -t120S -r10 --content-type "application/json" 'http://localhost:8081/orders POST {"item": "chicken"}'
-
-** SIEGE 4.0.5
-** Preparing 100 concurrent users for battle.
-The server is now under siege...
-
-HTTP/1.1 201     0.68 secs:     207 bytes ==> POST http://localhost:8081/orders
-HTTP/1.1 201     0.68 secs:     207 bytes ==> POST http://localhost:8081/orders
-HTTP/1.1 201     0.70 secs:     207 bytes ==> POST http://localhost:8081/orders
-HTTP/1.1 201     0.70 secs:     207 bytes ==> POST http://localhost:8081/orders
-:
-
-```
-
 - 새버전으로의 배포 시작
+
 ```
 kubectl set image ...
 ```
 
+- readiness 설정
+    ![image](https://user-images.githubusercontent.com/53402465/105119450-b25ede00-5b13-11eb-947b-a2d6da8de334.jpg)
 - seige 의 화면으로 넘어가서 Availability 가 100% 미만으로 떨어졌는지 확인
-```
-Transactions:		        3078 hits
-Availability:		       70.45 %
-Elapsed time:		       120 secs
-Data transferred:	        0.34 MB
-Response time:		        5.60 secs
-Transaction rate:	       17.15 trans/sec
-Throughput:		        0.01 MB/sec
-Concurrency:		       96.02
+    ![image](https://user-images.githubusercontent.com/53402465/105119446-b1c64780-5b13-11eb-9af5-c28364c8870c.jpg)
+
+배포기간중 Availability 가 평소 100%에서 97% 대로 떨어지는 것을 확인. 
+원인은 쿠버네티스가 성급하게 새로 올려진 서비스를 READY 상태로 인식하여 서비스 유입을 진행한 것이기 때문. 이를 막기위해 Readiness Probe 를 설정함:
+
+- readiness 설정 수정
+    ![image](https://user-images.githubusercontent.com/53402465/105119444-b12db100-5b13-11eb-9143-04f44194eb64.jpg)
 
 ```
-배포기간중 Availability 가 평소 100%에서 70% 대로 떨어지는 것을 확인. 원인은 쿠버네티스가 성급하게 새로 올려진 서비스를 READY 상태로 인식하여 서비스 유입을 진행한 것이기 때문. 이를 막기위해 Readiness Probe 를 설정함:
-
-```
-# deployment.yaml 의 readiness probe 의 설정:
-
-
 kubectl apply -f kubernetes/deployment.yaml
 ```
 
 - 동일한 시나리오로 재배포 한 후 Availability 확인:
-```
-Transactions:		        3078 hits
-Availability:		       100 %
-Elapsed time:		       120 secs
-Data transferred:	        0.34 MB
-Response time:		        5.60 secs
-Transaction rate:	       17.15 trans/sec
-Throughput:		        0.01 MB/sec
-Concurrency:		       96.02
-
-```
-
+    ![image](https://user-images.githubusercontent.com/53402465/105119438-af63ed80-5b13-11eb-981e-bb5b1c754cea.jpg)
 배포기간 동안 Availability 가 변화없기 때문에 무정지 재배포가 성공한 것으로 확인됨.
