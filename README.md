@@ -1,12 +1,3 @@
-# library
-WinterSchool_1stTeams
-
-- bookStatus 상태값
-"Reserved"
-"Cancelled"
-"Rentaled"
-"Returned"
-
 # 도서 대여 서비스
  
 # Table of contents
