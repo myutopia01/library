@@ -148,37 +148,94 @@ public interface BookRepository extends PagingAndSortingRepository<Book, Long>{
 1. SAGA
 2. CQRS
 3. Correlation
-# 사용자 도서 예약
-http POST http://localhost:8081/rentals memberId=1 bookId=1
-# 사용자 예약 후 결제확인
-http GET http://localhost:8082/payments/1
-# 사용자 예약한 책 상태 확인
-http GET http://localhost:8084/books/1
-# 사용자 도서 예약취소
-http PATCH http://localhost:8081/rentals/1 reqState="cancel"
-# 결제취소 확인
-http GET http://localhost:8082/payments/1
-# 사용자 예약 취소한 책 상태 확인
-http GET http://localhost:8084/books/1
-# mypage 서비스의 예약/대여 상태 조회
-http GET  http://localhost:8083/mypages
+# 사용자가 도서를 예약한다
+http POST http://20.194.7.119:8080/rentals memberId=1 bookId=1
+```
 
-
-# 사용자 도서 예약
-http POST http://localhost:8081/rentals memberId=1 bookId=2
-# 사용자 도서 대여
-http PATCH http://localhost:8081/rentals/2 reqState="rental"
-# 사용자 대여한 책 상태 확인
-http GET http://localhost:8084/books/2
-
-# 사용자 도서 반납
-http PATCH http://localhost:8081/rentals/2 reqState="return"
-# 사용자 반납한 책 상태 확인
-http GET http://localhost:8084/books
-# mypage 서비스의 예약/대여 상태 조회
-http GET  http://localhost:8083/mypages
+ ![image](https://user-images.githubusercontent.com/53402465/105122171-10da8b00-5b19-11eb-8ed0-664590206d60.png)
 
 ```
+#Rental 내역 확인
+http GET http://20.194.7.119:8080/rentals
+```
+
+ ![image](https://user-images.githubusercontent.com/53402465/105122172-10da8b00-5b19-11eb-8fcb-afa4002c7a42.png)
+
+```
+# 사용자 예약 후 결제확인
+http GET http://20.194.7.119:8080/payments
+```
+
+![image](https://user-images.githubusercontent.com/53402465/105122173-11732180-5b19-11eb-843a-44b1c61fdbd2.png)
+
+```
+# 사용자 예약한 책 상태 확인
+http GET http://20.194.7.119:8080/books
+```
+
+![image](https://user-images.githubusercontent.com/53402465/105122175-11732180-5b19-11eb-819d-6a8f95dd2036.png)
+
+```
+# 사용자 도서 예약취소
+http PATCH http://20.194.7.119:8080/rentals/1 reqState="cancel" 
+```
+
+![image](https://user-images.githubusercontent.com/53402465/105122166-0f10c780-5b19-11eb-8693-f5626f980855.png)
+
+```
+# 결제취소 확인
+http GET http://20.194.7.119:8080/rentals/1
+```
+
+![image](https://user-images.githubusercontent.com/53402465/105122169-1041f480-5b19-11eb-99c9-d4597c9fe0a8.png)
+
+```
+# 사용자 예약 취소한 책 상태 확인
+http GET http://20.194.7.119:8080/books
+```
+
+![image](https://user-images.githubusercontent.com/53402465/105122170-1041f480-5b19-11eb-9496-20c40fcfeffb.png)
+
+```
+
+# 사용자 도서 예약
+http POST http://20.194.7.119:8080/rentals memberId=1 bookId=1 
+```
+
+![image](https://user-images.githubusercontent.com/53402465/105122636-ee953d00-5b19-11eb-8147-d9e68ba72f74.png)
+
+```
+# 사용자 도서 대여
+http PATCH http://20.194.7.119:8080/rentals/2 reqState="rental" 
+```
+
+![image](https://user-images.githubusercontent.com/53402465/105122637-ee953d00-5b19-11eb-89f2-002a644ebcf0.png)
+
+```
+# 사용자 대여한 책 상태 확인
+http GET http://20.194.7.119:8080/books/
+```
+
+![image](https://user-images.githubusercontent.com/53402465/105122640-efc66a00-5b19-11eb-9ca2-3671c7b3af80.png)
+
+```
+# 사용자 도서 반납
+http PATCH http://20.194.7.119:8080/rentals/2 reqState="return" 
+```
+
+![image](https://user-images.githubusercontent.com/53402465/105122633-ed641000-5b19-11eb-8568-93f892300c96.png)
+
+```
+# 사용자 반납한 책 상태 확인
+http GET http://20.194.7.119:8080/books
+```
+
+![image](https://user-images.githubusercontent.com/53402465/105122635-edfca680-5b19-11eb-81c2-5a3b8876ede8.png)
+
+```
+# mypage 서비스의 예약/대여 상태 조회
+```
+
 
 
 4. Request / Response
