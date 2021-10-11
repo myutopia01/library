@@ -249,7 +249,6 @@ http GET http://20.194.7.119:8080/mypages/2
 - 결제서비스를 호출하기 위하여 Stub과 (FeignClient) 를 이용하여 Service 대행 인터페이스 (Proxy) 를 구현 
 
 ```
-# (rental) PaymentService.java 내용중
 
 @FeignClient(name="payment", url="${api.payment.url}")
 public interface PaymentService {
@@ -263,7 +262,7 @@ public interface PaymentService {
 
 - 예약 이후(@PostPersist) 결제를 요청하도록 처리
 ```
-# Rental.java
+- 주문을 받은 직후(@PostPersist) 결제를 요청하도록 처리
 
     @PostPersist
     public void onPostPersist(){
