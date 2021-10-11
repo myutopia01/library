@@ -284,7 +284,7 @@ public interface PaymentService {
 ```
 - 동기식 호출에서는 호출 시간에 따른 타임 커플링이 발생하며, 결제 시스템이 장애가 나면 주문도 못받는다는 것을 확인:
 
-
+```
 # 결제 (payment) 서비스를 잠시 내려놓음
 
 #주문처리
@@ -307,6 +307,7 @@ http http://localhost:8081/rentals memberId=1 bookId=1   #Success
 
 도서관리 시스템은 rental/payment 와 완전히 분리되어있으며, 이벤트 수신에 따라 처리되기 때문에, 도서관리시스템이 유지보수로 인해 잠시 내려간 상태라도 주문을 받는데 문제가 없다:
 ```
+
 # 도서관리 서비스 (book) 를 잠시 내려놓음
 
 #주문처리
