@@ -305,6 +305,8 @@ http http://localhost:8081/rentals memberId=1 bookId=1   #Success
 ![image](https://user-images.githubusercontent.com/53402465/105120799-3f0a9b80-5b16-11eb-883e-51588b5d6804.PNG)
 
 
+## 비동기식 호출과 Eventual Consistency
+
 도서관리 시스템은 rental/payment 와 완전히 분리되어있으며, 이벤트 수신에 따라 처리되기 때문에, 도서관리시스템이 유지보수로 인해 잠시 내려간 상태라도 주문을 받는데 문제가 없다:
 ```
 
