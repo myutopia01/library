@@ -138,9 +138,8 @@ public interface BookRepository extends PagingAndSortingRepository<Book, Long>{
 
 - 적용 후 REST API 의 테스트 시나리오
 
-1. SAGA
-2. CQRS
-3. Correlation
+1. 예약 -> 예약 내역 확인 -> 결제 확인 -> 예약 처리 확인 -> 예약 취소 -> 결제 취소 확인 -> 예약 취소 처리 확인 -> 마이 페이지
+2. 예약 -> 예약 내역 확인 -> 반납 -> 반납 상태 확인 -> 마이 페이지
 
 ```
 # 사용자가 도서를 예약한다
@@ -240,8 +239,6 @@ http GET http://20.194.7.119:8080/mypages/2
 
 ![image](https://user-images.githubusercontent.com/75401893/105123049-b8a48880-5b1a-11eb-833e-a44ac80e983a.png)
 
-
-4. Request / Response
 
 ```
 
