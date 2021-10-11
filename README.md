@@ -314,7 +314,7 @@ http http://localhost:8081/rentals memberId=1 bookId=1   #Success
 http http://localhost:8081/rentals memberId=1 bookId=1  #Success  
 
 #주문상태 확인
-
+```
 :
     ![image](https://user-images.githubusercontent.com/53402465/105119392-96f3d300-5b13-11eb-99b0-f9a79bdde8b7.PNG)
 
