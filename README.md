@@ -291,7 +291,7 @@ public interface PaymentService {
 http http://localhost:8081/rentals memberId=1 bookId=1  #Fail 
 ```
 
-    ![image](https://user-images.githubusercontent.com/53402465/105120797-3e720500-5b16-11eb-8b2f-d51aea5def12.PNG)
+![image](https://user-images.githubusercontent.com/53402465/105120797-3e720500-5b16-11eb-8b2f-d51aea5def12.PNG)
 
 ```
 #결제서비스 재기동
@@ -302,7 +302,7 @@ mvn spring-boot:run
 http http://localhost:8081/rentals memberId=1 bookId=1   #Success
 ```
 
-    ![image](https://user-images.githubusercontent.com/53402465/105120799-3f0a9b80-5b16-11eb-883e-51588b5d6804.PNG)
+![image](https://user-images.githubusercontent.com/53402465/105120799-3f0a9b80-5b16-11eb-883e-51588b5d6804.PNG)
 
 
 도서관리 시스템은 rental/payment 와 완전히 분리되어있으며, 이벤트 수신에 따라 처리되기 때문에, 도서관리시스템이 유지보수로 인해 잠시 내려간 상태라도 주문을 받는데 문제가 없다:
@@ -316,7 +316,7 @@ http http://localhost:8081/rentals memberId=1 bookId=1  #Success
 #주문상태 확인
 ```
 
-    ![image](https://user-images.githubusercontent.com/53402465/105119392-96f3d300-5b13-11eb-99b0-f9a79bdde8b7.PNG)
+![image](https://user-images.githubusercontent.com/53402465/105119392-96f3d300-5b13-11eb-99b0-f9a79bdde8b7.PNG)
 
 ```
 #상점 서비스 기동
@@ -327,4 +327,4 @@ mvn spring-boot:run
 http localhost:8080/rentals     # 모든 주문의 상태가 "reserved"으로 확인
 ```
 
-    ![image](https://user-images.githubusercontent.com/53402465/105119394-978c6980-5b13-11eb-8159-65886bee3a81.PNG)
+![image](https://user-images.githubusercontent.com/53402465/105119394-978c6980-5b13-11eb-8159-65886bee3a81.PNG)
