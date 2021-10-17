@@ -330,3 +330,11 @@ http localhost:8080/rentals     # 모든 주문의 상태가 "reserved"으로 �
 ```
 
 ![image](https://user-images.githubusercontent.com/53402465/105119394-978c6980-5b13-11eb-8159-65886bee3a81.PNG)
+
+
+
+##운영
+pipeline 구성
+![image](https://user-images.githubusercontent.com/66100487/137645837-def58949-15c7-4cb9-bc2a-dacda91fe014.png)
+
+
