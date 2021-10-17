@@ -337,4 +337,4 @@ http localhost:8080/rentals     # 모든 주문의 상태가 "reserved"으로 �
 pipeline 구성
 ![image](https://user-images.githubusercontent.com/66100487/137645837-def58949-15c7-4cb9-bc2a-dacda91fe014.png)
 
-
+![image](https://user-images.githubusercontent.com/66100487/137646200-fea5d33b-8934-46a8-ae72-47dfe118a931.png)
