@@ -238,9 +238,7 @@ http PATCH http://localhost:8081/rentals/2 reqState="return"
 # 사용자 반납한 책 상태 확인
 http GET http://localhost:8084/books
 ```
-
-![image](https://user-images.githubusercontent.com/53402465/105122635-edfca680-5b19-11eb-81c2-5a3b8876ede8.png)
-다시첨부
+![image](https://user-images.githubusercontent.com/66100487/137669619-8c0ed335-e813-4554-b773-6b8f9de447c4.png)
 
 ```
 #마이페이지 확인
