@@ -163,7 +163,7 @@ http GET http://localhost:8081/rentals
 http GET http://localhost:8082/payments
 ```
 
-![image](https://user-images.githubusercontent.com/66100487/137668046-b97abd6a-20e8-433b-b2a8-0faded7f4688.png)
+![image](https://user-images.githubusercontent.com/66100487/137669415-4c56c768-3e5f-43e6-8869-70dcd47b7752.png)
 
 
 ```
