@@ -51,17 +51,17 @@
 분석/설계 단계에서 도출된 헥사고날 아키텍처에 따라, 각 BC별로 대변되는 마이크로 서비스들을 스프링부트로 구현하였다. 구현한 각 서비스를 로컬에서 실행하는 방법은 아래와 같다 (각자의 포트넘버는 8081 ~ 808n 이다)
 
 ```
-cd book
+cd rental (port:8081)
 mvn spring-boot:run
 
-cd mypage
-mvn spring-boot:run 
-
-cd payment
+cd payment (port:8082)
 mvn spring-boot:run  
 
-cd rental
+cd book (port:8083)
 mvn spring-boot:run
+
+cd mypage (port:8084)
+mvn spring-boot:run 
 ```
 
 ## DDD 의 적용
@@ -136,35 +136,38 @@ public interface BookRepository extends PagingAndSortingRepository<Book, Long>{
 }
 ```
 
-- 적용 후 REST API 의 테스트 시나리오
+- 적용 후 REST API 의 테스트 시나리ren
 
 1. 예약 -> 예약 내역 확인 -> 결제 확인 -> 예약 처리 확인 -> 예약 취소 -> 결제 취소 확인 -> 예약 취소 처리 확인 -> 마이 페이지
 2. 예약 -> 예약 내역 확인 -> 반납 -> 반납 상태 확인 -> 마이 페이지
 
 ```
 # 사용자가 도서를 예약한다
-http POST http://localhost:8080/rentals memberId=1 bookId=1
+http POST http://localhost:8081/rentals memberId=1 bookId=1
 ```
 
- ![image](https://user-images.githubusercontent.com/53402465/105122171-10da8b00-5b19-11eb-8ed0-664590206d60.png)
+ ![image](https://user-images.githubusercontent.com/66100487/137663272-107791ec-14e8-455a-bae4-4deac8662065.png)
+
 
 ```
 #Rental 내역 확인
-http GET http://localhost:8080/rentals
+http GET http://localhost:8081/rentals
 ```
 
- ![image](https://user-images.githubusercontent.com/53402465/105122172-10da8b00-5b19-11eb-8fcb-afa4002c7a42.png)
+![image](https://user-images.githubusercontent.com/66100487/137664602-fb6bb7ac-3820-471b-ba6c-effabed11966.png)
+
 
 ```
 # 사용자 예약 후 결제확인
-http GET http://localhost:8080/payments
+http GET http://localhost:8082/payments
 ```
 
-![image](https://user-images.githubusercontent.com/53402465/105122173-11732180-5b19-11eb-843a-44b1c61fdbd2.png)
+![image](https://user-images.githubusercontent.com/66100487/137664542-346c03e8-7d7b-4507-9a55-665f06c12460.png)
+
 
 ```
 # 사용자 예약한 책 상태 확인
-http GET http://localhost:8080/books
+http GET http://localhost:8083/books
 ```
 
 ![image](https://user-images.githubusercontent.com/53402465/105122175-11732180-5b19-11eb-819d-6a8f95dd2036.png)
@@ -338,3 +341,5 @@ pipeline 구성
 ![image](https://user-images.githubusercontent.com/66100487/137645837-def58949-15c7-4cb9-bc2a-dacda91fe014.png)
 
 ![image](https://user-images.githubusercontent.com/66100487/137646200-fea5d33b-8934-46a8-ae72-47dfe118a931.png)
+
+
