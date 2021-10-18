@@ -317,6 +317,52 @@ http post http://localhost:8081/rentals memberId=1 bookId=1   #Success
 
 ## 비동기식 호출과 Eventual Consistency
 
+결제 이후 도서관리(book)시스템으로 결제 완료 여부를 알려주는 행위는 비 동기식으로 처리하여 도서관리 시스템의 처리로 인해 결제주문이 블로킹 되지 않도록 처리한다.
+- 이를 위하여 결제이력에 기록을 남긴 후에 곧바로 결제승인(paid)이 되었다는 도메인 이벤트를 카프카로 송출한다(Publish)
+ 
+```
+# Payment.java
+
+@Entity
+@Table(name="Payment_table")
+public class Payment {
+
+ ...
+    @PostPersist
+    public void onPostPersist(){
+        Paid paid = new Paid();
+        BeanUtils.copyProperties(this, paid);
+        paid.publishAfterCommit();
+ ...
+}
+```
+- 도서관리 서비스는 결제완료 이벤트를 수신하여 자신의 정책을 처리하도록 PolicyHandler 를 구현한다:
+
+```
+# PolicyHandler.java (book)
+...
+
+@Service
+public class PolicyHandler{
+
+    @StreamListener(KafkaProcessor.INPUT)
+    public void wheneverPaid_(@Payload Paid paid){
+        // 결제완료(예약)
+        if(paid.isMe()){
+            Book book = new Book();
+            book.setId(paid.getBookId());
+            book.setMemberId(paid.getMemberId());
+            book.setRendtalId(paid.getId());
+            book.setBookStatus("reserved");
+
+            bookRepository.save(book);
+        }
+    }
+}
+
+```
+
+
 도서관리 시스템은 rental/payment 와 완전히 분리되어있으며, 이벤트 수신에 따라 처리되기 때문에, 도서관리시스템이 유지보수로 인해 잠시 내려간 상태라도 주문을 받는데 문제가 없다:
 ```
 
@@ -352,7 +398,7 @@ http localhost:8080/rentals     # 모든 주문의 상태가 "reserved"으로 �
 
 
 
-##운영
+## 운영
 pipeline 구성
 ![image](https://user-images.githubusercontent.com/66100487/137645837-def58949-15c7-4cb9-bc2a-dacda91fe014.png)
 
