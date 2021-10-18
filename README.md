@@ -289,13 +289,15 @@ public interface PaymentService {
 # 결제 (payment) 서비스를 잠시 내려놓음
 
 #주문처리
-http http://localhost:8081/rentals memberId=1 bookId=1  #Fail 
+http POST http://localhost:8081/rentals memberId=1 bookId=1  #Fail 
 ```
 
 
 ![image](https://user-images.githubusercontent.com/66100487/137673711-1f3a99f4-27dc-4ef4-990f-77aaac7a0d14.png)
 
-![image](https://user-images.githubusercontent.com/66100487/137673828-926e4711-b082-4bf1-a45e-3a1d7e8f1ce6.png)
+![image](https://user-images.githubusercontent.com/66100487/137674423-c9c92ea1-aeec-4293-805d-234d7e35ab64.png)
+
+
 
 ```
 #결제서비스 재기동
@@ -303,13 +305,14 @@ cd payment
 mvn spring-boot:run
 
 #주문처리
-http http://localhost:8081/rentals memberId=1 bookId=1   #Success
+http post http://localhost:8081/rentals memberId=1 bookId=1   #Success
 ```
 
 
 ![image](https://user-images.githubusercontent.com/66100487/137673711-1f3a99f4-27dc-4ef4-990f-77aaac7a0d14.png)
 
-![image](https://user-images.githubusercontent.com/66100487/137673828-926e4711-b082-4bf1-a45e-3a1d7e8f1ce6.png)
+![image](https://user-images.githubusercontent.com/66100487/137674572-9d38645a-8b1e-4e83-bc56-bdaf8f556024.png)
+
 
 
 ## 비동기식 호출과 Eventual Consistency
