@@ -292,7 +292,10 @@ public interface PaymentService {
 http http://localhost:8081/rentals memberId=1 bookId=1  #Fail 
 ```
 
-![image](https://user-images.githubusercontent.com/53402465/105120797-3e720500-5b16-11eb-8b2f-d51aea5def12.PNG)
+
+![image](https://user-images.githubusercontent.com/66100487/137673711-1f3a99f4-27dc-4ef4-990f-77aaac7a0d14.png)
+
+![image](https://user-images.githubusercontent.com/66100487/137673828-926e4711-b082-4bf1-a45e-3a1d7e8f1ce6.png)
 
 ```
 #결제서비스 재기동
@@ -303,7 +306,10 @@ mvn spring-boot:run
 http http://localhost:8081/rentals memberId=1 bookId=1   #Success
 ```
 
-![image](https://user-images.githubusercontent.com/53402465/105120799-3f0a9b80-5b16-11eb-883e-51588b5d6804.PNG)
+
+![image](https://user-images.githubusercontent.com/66100487/137673711-1f3a99f4-27dc-4ef4-990f-77aaac7a0d14.png)
+
+![image](https://user-images.githubusercontent.com/66100487/137673828-926e4711-b082-4bf1-a45e-3a1d7e8f1ce6.png)
 
 
 ## 비동기식 호출과 Eventual Consistency
