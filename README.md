@@ -247,7 +247,8 @@ http GET http://localhost:8084/books
 http GET http://localhost:8083/mypages/2
 ```
 
-![image](https://user-images.githubusercontent.com/66100487/137667577-a3217712-c834-4245-9c44-9d60a8466eed.png)
+![image](https://user-images.githubusercontent.com/66100487/137671101-03be1e94-a7af-470d-9dce-7d209e44da1a.png)
+
 
 
 ## 동기식 호출 과 Fallback 처리
