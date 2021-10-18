@@ -171,7 +171,8 @@ http GET http://localhost:8082/payments
 http GET http://localhost:8084/books
 ```
 
-![image](https://user-images.githubusercontent.com/66100487/137667677-e82a2e5c-257b-49ff-a7f6-7f0828b9017b.png)
+![image](https://user-images.githubusercontent.com/66100487/137669619-8c0ed335-e813-4554-b773-6b8f9de447c4.png)
+
 
 ```
 # 사용자 도서 예약취소
