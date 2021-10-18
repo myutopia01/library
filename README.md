@@ -407,4 +407,4 @@ pipeline 구성
 ![image](https://user-images.githubusercontent.com/66100487/137646200-fea5d33b-8934-46a8-ae72-47dfe118a931.png)
 
 
-CI/CD Pipeline 까지 진행하였고 이후에는 진행하지 못하였습니다.
+CI/CD Pipeline 설정 까지 진행하였고 이후에는 진행하지 못하였습니다.
