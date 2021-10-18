@@ -314,12 +314,18 @@ http http://localhost:8081/rentals memberId=1 bookId=1   #Success
 # 도서관리 서비스 (book) 를 잠시 내려놓음
 
 #주문처리
-http http://localhost:8081/rentals memberId=1 bookId=1  #Success  
+http POST http://localhost:8084/rentals memberId=1 bookId=1 
 
 #주문상태 확인
 ```
 
-![image](https://user-images.githubusercontent.com/53402465/105119392-96f3d300-5b13-11eb-99b0-f9a79bdde8b7.PNG)
+![image](https://user-images.githubusercontent.com/66100487/137673385-cdc6b145-b93c-4d9c-b2fd-c55263228200.png)
+
+![image](https://user-images.githubusercontent.com/66100487/137673900-fd0a906b-559f-4f53-a1d6-c92c7c375f36.png)
+
+
+
+
 
 ```
 #상점 서비스 기동
@@ -330,7 +336,10 @@ mvn spring-boot:run
 http localhost:8080/rentals     # 모든 주문의 상태가 "reserved"으로 확인
 ```
 
-![image](https://user-images.githubusercontent.com/53402465/105119394-978c6980-5b13-11eb-8159-65886bee3a81.PNG)
+![image](https://user-images.githubusercontent.com/66100487/137673711-1f3a99f4-27dc-4ef4-990f-77aaac7a0d14.png)
+
+![image](https://user-images.githubusercontent.com/66100487/137673828-926e4711-b082-4bf1-a45e-3a1d7e8f1ce6.png)
+
 
 
 
