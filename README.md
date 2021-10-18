@@ -136,7 +136,7 @@ public interface BookRepository extends PagingAndSortingRepository<Book, Long>{
 }
 ```
 
-- 적용 후 REST API 의 테스트 시나리ren
+- 적용 후 REST API 의 테스트 시나리오
 
 1. 예약 -> 예약 내역 확인 -> 결제 확인 -> 예약 처리 확인 -> 예약 취소 -> 결제 취소 확인 -> 예약 취소 처리 확인 -> 마이 페이지
 2. 예약 -> 예약 내역 확인 -> 반납 -> 반납 상태 확인 -> 마이 페이지
