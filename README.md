@@ -225,8 +225,7 @@ http PATCH http://localhost:8081/rentals/2 reqState="rental"
 http GET http://localhost:8084/books/
 ```
 
-![image](https://user-images.githubusercontent.com/53402465/105122640-efc66a00-5b19-11eb-9ca2-3671c7b3af80.png)
-다시첨부
+![image](https://user-images.githubusercontent.com/66100487/137669619-8c0ed335-e813-4554-b773-6b8f9de447c4.png)
 
 ```
 # 사용자 도서 반납
