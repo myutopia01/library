@@ -155,7 +155,7 @@ http POST http://localhost:8081/rentals memberId=1 bookId=1
 http GET http://localhost:8081/rentals
 ```
 
-![image](https://user-images.githubusercontent.com/66100487/137665914-960fbbe4-266a-4f78-9322-689b5ebb6f07.png)
+![image](https://user-images.githubusercontent.com/66100487/137667851-299054ce-5671-400e-a175-e8167f49b205.png)
 
 
 ```
@@ -163,7 +163,7 @@ http GET http://localhost:8081/rentals
 http GET http://localhost:8082/payments
 ```
 
-![image](https://user-images.githubusercontent.com/66100487/137665989-ec57dbb1-3dfb-49b3-9744-d628489151a1.png)
+![image](https://user-images.githubusercontent.com/66100487/137668046-b97abd6a-20e8-433b-b2a8-0faded7f4688.png)
 
 
 ```
