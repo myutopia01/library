@@ -57,10 +57,10 @@ mvn spring-boot:run
 cd payment (port:8082)
 mvn spring-boot:run  
 
-cd book (port:8083)
+cd book (port:8084)
 mvn spring-boot:run
 
-cd mypage (port:8084)
+cd mypage (port:8083)
 mvn spring-boot:run 
 ```
 
@@ -146,7 +146,8 @@ public interface BookRepository extends PagingAndSortingRepository<Book, Long>{
 http POST http://localhost:8081/rentals memberId=1 bookId=1
 ```
 
- ![image](https://user-images.githubusercontent.com/66100487/137663272-107791ec-14e8-455a-bae4-4deac8662065.png)
+ ![image](https://user-images.githubusercontent.com/66100487/137665939-8e9f8efe-065d-4ab9-b942-cec1ce28708f.png)
+
 
 
 ```
@@ -154,7 +155,7 @@ http POST http://localhost:8081/rentals memberId=1 bookId=1
 http GET http://localhost:8081/rentals
 ```
 
-![image](https://user-images.githubusercontent.com/66100487/137664602-fb6bb7ac-3820-471b-ba6c-effabed11966.png)
+![image](https://user-images.githubusercontent.com/66100487/137665914-960fbbe4-266a-4f78-9322-689b5ebb6f07.png)
 
 
 ```
@@ -162,85 +163,91 @@ http GET http://localhost:8081/rentals
 http GET http://localhost:8082/payments
 ```
 
-![image](https://user-images.githubusercontent.com/66100487/137664542-346c03e8-7d7b-4507-9a55-665f06c12460.png)
+![image](https://user-images.githubusercontent.com/66100487/137665989-ec57dbb1-3dfb-49b3-9744-d628489151a1.png)
 
 
 ```
 # 사용자 예약한 책 상태 확인
-http GET http://localhost:8083/books
+http GET http://localhost:8084/books
 ```
 
-![image](https://user-images.githubusercontent.com/53402465/105122175-11732180-5b19-11eb-819d-6a8f95dd2036.png)
+![image](https://user-images.githubusercontent.com/66100487/137667677-e82a2e5c-257b-49ff-a7f6-7f0828b9017b.png)
 
 ```
 # 사용자 도서 예약취소
-http PATCH http://localhost:8080/rentals/1 reqState="cancel" 
+http PATCH http://localhost:8081/rentals/1 reqState="cancel" 
 ```
 
-![image](https://user-images.githubusercontent.com/53402465/105122166-0f10c780-5b19-11eb-8693-f5626f980855.png)
+![image](https://user-images.githubusercontent.com/66100487/137666138-e53fcac0-d4ee-43f4-bbf0-9159b49468a5.png)
+
 
 ```
 # 결제취소 확인
-http GET http://localhost:8080/rentals/1
+http GET http://localhost:8081/rentals/1
 ```
 
-![image](https://user-images.githubusercontent.com/53402465/105122169-1041f480-5b19-11eb-99c9-d4597c9fe0a8.png)
+![image](https://user-images.githubusercontent.com/66100487/137666495-02e39eab-d9f6-4ef2-b2db-9097b240d675.png)
+
+
 
 ```
 # 사용자 예약 취소한 책 상태 확인
-http GET http://localhost:8080/books
+http GET http://localhost:8084/books
 ```
 
-![image](https://user-images.githubusercontent.com/53402465/105122170-1041f480-5b19-11eb-9496-20c40fcfeffb.png)
+![image](https://user-images.githubusercontent.com/66100487/137667686-14cd6a5b-cdd5-4d6f-925d-d92cfd3e985e.png)
 
 ```
 #마이페이지 확인
-http GET http://localhost:8080/mypages/1
+http GET http://localhost:8083/mypages/1
 ```
 
-![image](https://user-images.githubusercontent.com/75401893/105123042-b4786b00-5b1a-11eb-9f8c-0b0b20a7e8d9.png)
+![image](https://user-images.githubusercontent.com/66100487/137667569-d19e1d26-31dc-4594-88df-98f4bcfa7a46.png)
 
 ```
 # 사용자 도서 예약
-http POST http://localhost:8080/rentals memberId=1 bookId=1 
+http POST http://localhost:8081/rentals memberId=1 bookId=1 
 ```
 
-![image](https://user-images.githubusercontent.com/53402465/105122636-ee953d00-5b19-11eb-8147-d9e68ba72f74.png)
+![image](https://user-images.githubusercontent.com/66100487/137666784-862cc377-159c-423e-91cf-6961ba44df4b.png)
 
 ```
 # 사용자 도서 대여
-http PATCH http://localhost:8080/rentals/2 reqState="rental" 
+http PATCH http://localhost:8081/rentals/2 reqState="rental" 
 ```
 
-![image](https://user-images.githubusercontent.com/53402465/105122637-ee953d00-5b19-11eb-89f2-002a644ebcf0.png)
+![image](https://user-images.githubusercontent.com/66100487/137666880-892102cf-9dfb-4119-bd0b-b041cbbc865f.png)
+
 
 ```
 # 사용자 대여한 책 상태 확인
-http GET http://localhost:8080/books/
+http GET http://localhost:8084/books/
 ```
 
 ![image](https://user-images.githubusercontent.com/53402465/105122640-efc66a00-5b19-11eb-9ca2-3671c7b3af80.png)
+다시첨부
 
 ```
 # 사용자 도서 반납
-http PATCH http://localhost:8080/rentals/2 reqState="return" 
+http PATCH http://localhost:8081/rentals/2 reqState="return" 
 ```
 
-![image](https://user-images.githubusercontent.com/53402465/105122633-ed641000-5b19-11eb-8568-93f892300c96.png)
+![image](https://user-images.githubusercontent.com/66100487/137666948-695dab55-0392-4a84-908a-8d5f4c7a811c.png)
 
 ```
 # 사용자 반납한 책 상태 확인
-http GET http://localhost:8080/books
+http GET http://localhost:8084/books
 ```
 
 ![image](https://user-images.githubusercontent.com/53402465/105122635-edfca680-5b19-11eb-81c2-5a3b8876ede8.png)
+다시첨부
 
 ```
 #마이페이지 확인
-http GET http://localhost:8080/mypages/2
+http GET http://localhost:8083/mypages/2
 ```
 
-![image](https://user-images.githubusercontent.com/75401893/105123049-b8a48880-5b1a-11eb-833e-a44ac80e983a.png)
+![image](https://user-images.githubusercontent.com/66100487/137667577-a3217712-c834-4245-9c44-9d60a8466eed.png)
 
 
 ## 동기식 호출 과 Fallback 처리
