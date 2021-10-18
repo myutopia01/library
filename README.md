@@ -294,7 +294,7 @@ http POST http://localhost:8081/rentals memberId=1 bookId=1  #Fail
 ```
 
 
-![image](https://user-images.githubusercontent.com/66100487/137673711-1f3a99f4-27dc-4ef4-990f-77aaac7a0d14.png)
+![image](https://user-images.githubusercontent.com/66100487/137676765-5d016e1b-5afb-4381-9ee0-fdea4f1f6541.png)
 
 ![image](https://user-images.githubusercontent.com/66100487/137674423-c9c92ea1-aeec-4293-805d-234d7e35ab64.png)
 
@@ -375,7 +375,8 @@ http POST http://localhost:8084/rentals memberId=1 bookId=1
 #주문상태 확인
 ```
 
-![image](https://user-images.githubusercontent.com/66100487/137673385-cdc6b145-b93c-4d9c-b2fd-c55263228200.png)
+![image](https://user-images.githubusercontent.com/66100487/137676782-0fd236da-0f03-4fb0-993b-9f2924074923.png)
+
 
 ![image](https://user-images.githubusercontent.com/66100487/137673900-fd0a906b-559f-4f53-a1d6-c92c7c375f36.png)
 
